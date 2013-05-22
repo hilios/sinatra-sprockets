@@ -104,17 +104,16 @@ Configuration
 You can control Sprockets entirely using Sinatra `set` configuration method. All options available and a new
 
 ```ruby
-set :assets_prefix,     '/assets'
-set :assets_path,       %w[
+set :assets_prefix, '/assets'
+set :assets_path,   %w[
   app/assets/vendor
   app/assets/stylesheets
   app/assets/javascripts
   app/assets/images
 ]
-set :assets_precompile, %w(application.js application.css)
-set :assets_host,       '//cdn.host.com'
+set :assets_precompile,     %w(application.js application.css)
+set :assets_host,           '//cdn.host.com'
 set :assets_manifest_file,  File.join(public_folder, "assets/manifest.json")
-
 set :assets_css_compressor, :sass
 set :assets_js_compressor,  :uglifier
 ```
@@ -124,7 +123,7 @@ Minification
 
 As seen on the last example of the configurantion you can configure other libraries to compress your assets, Sinatra::Sprockets handle them transparently and it's up to you to require the gems.
 
-## SASS
+### SASS
 
 ```ruby
 gem 'sass'
