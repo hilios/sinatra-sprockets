@@ -44,8 +44,10 @@ module Sinatra
         # Add my helpers
         app.helpers Helpers
 
-        # Register asset pipeline middleware so we don't need to route on .ru
-        app.use Server, app.sprockets, %r(#{assets_prefix})
+        configure :development do
+          # Register asset pipeline middleware so we don't need to route on .ru
+          app.use Server, app.sprockets, %r(#{assets_prefix})
+        end
         
         # Configure compression on production
         app.configure :production do
