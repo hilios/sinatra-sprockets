@@ -8,6 +8,7 @@ module Helpers
     end
     args.join("\n")
   end
+  alias :stylesheets :stylesheet
 
   def javascript(*args)
     args.map! do |asset|
@@ -16,4 +17,5 @@ module Helpers
     end
     args.join("\n")
   end
+  alias :javascripts :javascript
 end
