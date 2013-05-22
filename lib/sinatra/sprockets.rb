@@ -17,13 +17,15 @@ module Sinatra
         # Configure
         app.set_default :assets_prefix,     '/assets'
         app.set_default :assets_path,       [app.assets_prefix]
-        app.set_default :assets_precompile, %w(application.js application.css)
+        app.set_default :assets_precompile, %w(application.js 
+          application.css)
         app.set_default :assets_host,       ''
         # Compressors
         app.set_default :assets_css_compressor, :none
         app.set_default :assets_js_compressor,  :none
         # Set the manifest file path
-        app.set_default :assets_manifest_file, File.join(app.public_folder, app.assets_prefix, "manifset.json")
+        app.set_default :assets_manifest_file, 
+          File.join(app.public_folder, app.assets_prefix, "manifset.json")
         
         # Append all paths
         app.assets_path.each do |path|
@@ -33,7 +35,8 @@ module Sinatra
         # Configure Sprockets::Helpers
         ::Sprockets::Helpers.configure do |config|
           config.environment = app.sprockets
-          config.manifest    = ::Sprockets::Manifest.new(app.sprockets, app.assets_manifest_file)
+          config.manifest    = ::Sprockets::Manifest.new(app.sprockets, 
+            app.assets_manifest_file)
           config.prefix      = app.assets_prefix
           config.public_path = app.public_folder
           config.digest      = true
@@ -48,8 +51,14 @@ module Sinatra
         
         # Configure compression on production
         app.configure :production do
-          app.sprockets.css_compressor = app.assets_css_compressor unless app.assets_css_compressor == :none
-          app.sprockets.js_compressor  = app.assets_js_compressor  unless app.assets_js_compressor  == :none
+          # Set the CSS compressor
+          unless app.assets_css_compressor == :none
+            app.sprockets.css_compressor = app.assets_css_compressor
+          end
+          # Set the JS compressor
+          unless app.assets_js_compressor  == :none
+            app.sprockets.js_compressor  = app.assets_js_compressor
+          end
         end
       end
     end
@@ -58,6 +67,4 @@ module Sinatra
       self.set(key, default_value) unless self.respond_to? key
     end
   end
-  # Register for classic style apps
-  # register Sprockets
 end
