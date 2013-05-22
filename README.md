@@ -3,7 +3,7 @@ Sinatra::Sprockets
 
 Plug and play extension for sinatra that mimic rails assets pipeline through Sprockets.
 
-This gem allows you easly deploy assets via Sprockets assets pipeline just as Rails does, also configure the rake task for compression.
+This gem allows you easly deploy assets via Sprockets assets pipeline just as Rails does, also help you configure the rake tasks for compression. The goal is to have a headless configuration extension and be tested (all other aren't) to give users a fast access to all Sprockets goodness.
 
 Installation & Usage
 --------------------
@@ -151,6 +151,8 @@ gem 'yui-compressor'
 set :assets_css_compressor, :yui
 ```
 
-## Compass
+#### Compass and others gems
 
 The integration is easily done by requiring the [sprockets-sass](https://github.com/petebrowne/sprockets-sass) gem.
+
+None the less any gem that have integration with the Sprockets will work seamlessly. If you need any other configuration you can call Sprockets configuration directly.
