@@ -1,3 +1,6 @@
+require 'sprockets'
+require 'sprockets-helpers'
+
 require 'version'
 require 'server'
 require 'helpers'
@@ -56,4 +59,6 @@ module Sinatra
       self.set(key, default_value) unless self.respond_to? key
     end
   end
+  # Register for classic style apps
+  register Sprockets
 end
