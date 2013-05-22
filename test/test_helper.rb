@@ -1,13 +1,12 @@
 ENV['RACK_ENV'] ||= 'test'
 require 'minitest/autorun'
+require 'minitest/colorize'
 require 'rack/test'
 
 require 'sinatra/base'
 require 'sinatra/sprockets'
 
-class TestApp < Sinatra::Base
-  register Sinatra::Sprockets
-end
+require 'app/test'
 
 class MiniTest::Unit::TestCase
   include Rack::Test::Methods
