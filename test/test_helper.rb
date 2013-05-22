@@ -1,6 +1,5 @@
 ENV['RACK_ENV'] ||= 'test'
 require 'minitest/autorun'
-require 'minitest/colorize'
 require 'rack/test'
 
 require 'sinatra/base'
