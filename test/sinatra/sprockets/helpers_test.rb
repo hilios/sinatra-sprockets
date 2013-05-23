@@ -1,5 +1,4 @@
 require 'test_helper'
-# require './lib/sinatra/sprockets/helpers'
 
 class Sinatra::Sprockets::HelpersTest < MiniTest::Test
 

@@ -1,14 +1,10 @@
-# ENV['RACK_ENV'] ||= 'test'
+ENV['RACK_ENV'] = 'test'
 require 'app/test'
 require 'rack/test'
 require 'minitest/autorun'
 
 class MiniTest::Test
   include Rack::Test::Methods
-
-  def setup
-    ENV['RACK_ENV'] = 'test'
-  end
 
   def app
     TestApp
@@ -18,7 +14,7 @@ class MiniTest::Test
     Class.new(TestApp, &block)
   end
 
-  def mock_base_app
-     Class.new(Sinatra::Base, &block) 
+  def mock_base_app(&block)
+     Class.new(Sinatra::Base, &block)
   end
 end

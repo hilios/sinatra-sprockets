@@ -17,7 +17,7 @@ module Sinatra
         app.set :sprockets, sprockets
         # Configure
         app.set_default :assets_prefix,     '/assets'
-        app.set_default :assets_path,       [app.assets_prefix]
+        app.set_default :assets_path,       %w(assets)
         app.set_default :assets_precompile, %w(application.js 
           application.css)
         app.set_default :assets_host,       ''
@@ -30,7 +30,8 @@ module Sinatra
         
         # Append all paths
         app.assets_path.each do |path|
-          sprockets.append_path File.join(app.root, path)
+          path = File.join(app.root, path) unless path =~ /^\//
+          sprockets.append_path path
         end
 
         app.configure do

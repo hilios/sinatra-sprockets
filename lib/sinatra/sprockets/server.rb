@@ -12,7 +12,7 @@ module Sinatra
       end
 
       def call(env)
-        path = env['PATH_INFO']
+        path = env["PATH_INFO"]
         if path =~ path_prefix and not engine.nil?
           env["PATH_INFO"].sub!(path_prefix, '')
           engine.call(env)
