@@ -12,7 +12,7 @@ Set on your Gemset file if you are using Bundler:
 
 ```ruby
 gem 'sinatra-sprockets-wheel'
-# Don't forget the js evaluator has
+# Don't forget the js evaluator: gem 'therubyracer'
 ```
 
 If you are using the Classic style just require the extension.
@@ -37,7 +37,7 @@ class Hello < Sinatra::Base
 end
 ```
 
-Following the default configuration you just need to create the `/assets` folder and Sprockets will search the `application.js` and `application.css` to precompile (if you want to set-up a different structure jump to the [configuration](#configuration) chapter). The default structure schema is:
+Following the default configuration you just need to create the `/assets` folder and Sprockets will search for `application.js` and `application.css` to precompile (if you want to set-up a different structure jump to the [configuration](#configuration) chapter). The default folder schema is:
 
 ```
 hello/
@@ -76,7 +76,7 @@ Sinatra::Sprockets.rake_tasks(App)
 Helpers
 -------
 
-This gem come bundled with [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) to facilitate the path resolution of your assets inside sprockets itself or your application.
+This gem come bundled with [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) to help the path resolution of your assets inside sprockets itself or your application.
 
 ```css
 body {
@@ -90,18 +90,18 @@ body {
 
 None the less there there are two helpers inherited from Rails for assign the asset on your template:
 
-```haml
-= javascript :application
-= stylesheet :application
+```erb
+<%= javascript :application %>
+<%= stylesheet :application %>
 
-= javascripts :js, :another_js
-= stylesheets :css, :another_css
+<%= javascripts :js, :another_js %>
+<%= stylesheets :css, :another_css %>
 ```
 
 Configuration
 -------------
 
-You can control Sprockets entirely using Sinatra `set` configuration method. All options available and a new
+You can control Sprockets entirely using Sinatra `set` configuration method. Bellow a list of the configuration:
 
 ```ruby
 set :assets_prefix, '/assets'
@@ -155,4 +155,4 @@ set :assets_css_compressor, :yui
 
 The integration is easily done by requiring the [sprockets-sass](https://github.com/petebrowne/sprockets-sass) gem.
 
-None the less any gem that have integration with the Sprockets will work seamlessly. If you need any other configuration you can call Sprockets configuration directly.
+Also any gem that have integration with the Sprockets will work seamlessly. If you need any other configuration you can call Sprockets configuration directly.
