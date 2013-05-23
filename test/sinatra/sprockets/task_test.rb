@@ -1,6 +1,15 @@
 
 require 'test_helper'
 
+class Sprockets::Manifest
+  # Remove output from Sprockets tasks
+  def logger
+    @logger ||= Logger.new($stdout)
+    @logger.level = Logger::FATAL
+    @logger
+  end
+end
+
 class Sinatra::Sprockets::TasksHelper < MiniTest::Test
   def setup
     require 'rake'
@@ -8,9 +17,7 @@ class Sinatra::Sprockets::TasksHelper < MiniTest::Test
     Rake.application = @rake
     Rake::Task.define_task(:environment)
     # Define the task
-    ::Sinatra::Sprockets::Task.define(app) do
-      log_level = nil
-    end
+    ::Sinatra::Sprockets::Task.define(app)
   end
 
   def test_task_definition
