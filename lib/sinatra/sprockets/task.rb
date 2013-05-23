@@ -4,26 +4,29 @@ require 'rake/sprocketstask'
 
 module Sinatra
   module Sprockets
-    class RakeTask < Rake::TaskLib
+    class Task < Rake::SprocketsTask
+      # Just create a wrapper for the Sprockets Task
       def initialize(app)
-        namespace :assets do
-          desc "Precompile assets"
-          task :precompile do
-            env = app.sprockets
-            manifest = Sprockets::Manifest.new(env.index, app.assets_path)
-            manifest.compile(app.assets_precompile)
-          end
+        super(:precompile)
+        @output       = File.join(app.public_folder, app.assets_prefix)
+        @assets       = app.assets_precompile
+        @environment  = app.sprockets
 
-          desc "Clean assets"
-          task :clean do
-            FileUtils.rm_rf(app.assets_path)
-          end
+        yield self if block_given?
+      end
+
+      def define
+        namespace :assets do
+          super
         end
       end
-    end
 
-    def self.rake_tasks(app)
-      RakeTask.new(app)
+      class << self
+        def define(app)
+          Task.new(app)
+        end
+        alias_method :define!, :define
+      end
     end
   end
 end
