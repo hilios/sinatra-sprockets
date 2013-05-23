@@ -1,21 +1,23 @@
-module Helpers
-  include Sprockets::Helpers
+module Sinatra
+  module Sprockets
+    module Helpers
+      def stylesheet(*args)
+        args.map! do |asset|
+          asset = "#{asset}.css" if asset.is_a? Symbol
+          "<link href='#{asset_path(asset)}' rel='stylesheet' type='text/css' />"
+        end
+        args.join("\n")
+      end
+      alias :stylesheets :stylesheet
 
-  def stylesheet(*args)
-    args.map! do |asset|
-      asset = "#{asset}.css" if asset.is_a? Symbol
-      "<link href='#{asset_path(asset)}' rel='stylesheet' type='text/css' />"
+      def javascript(*args)
+        args.map! do |asset|
+          asset = "#{asset}.js" if asset.is_a? Symbol
+          "<script type='text/javascript' src='#{asset_path(asset)}'></script>"
+        end
+        args.join("\n")
+      end
+      alias :javascripts :javascript
     end
-    args.join("\n")
   end
-  alias :stylesheets :stylesheet
-
-  def javascript(*args)
-    args.map! do |asset|
-      asset = "#{asset}.js" if asset.is_a? Symbol
-      "<script type='text/javascript' src='#{asset_path(asset)}'></script>"
-    end
-    args.join("\n")
-  end
-  alias :javascripts :javascript
 end
