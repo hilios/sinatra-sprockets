@@ -1,13 +1,10 @@
 require 'test_helper'
-require './lib/sinatra/sprockets/helpers'
+# require './lib/sinatra/sprockets/helpers'
 
 class Sinatra::Sprockets::HelpersTest < MiniTest::Test
-  include ::Sinatra::Sprockets::Helpers
 
   def app
     mock_app do
-      helpers ::Sinatra::Sprockets::Helpers
-
       get('/javascript')  { javascript(:application) }
       get('/javascripts') { javascripts(:application, :other) }
 
