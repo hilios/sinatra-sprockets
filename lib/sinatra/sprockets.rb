@@ -1,6 +1,4 @@
 require 'sprockets'
-require 'sprockets-helpers'
-
 require 'sprockets/version'
 require 'sprockets/server'
 require 'sprockets/helpers'
@@ -42,7 +40,9 @@ module Sinatra
           config.digest      = true
         end
         # Add my helpers
-        app.helpers Helpers
+        app.helpers do
+          include Helpers
+        end
 
         app.configure :development do
           # Register asset pipeline middleware so we don't need to route on .ru

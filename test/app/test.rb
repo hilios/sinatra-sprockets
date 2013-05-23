@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'sinatra/sprockets'
+require './lib/sinatra/sprockets'
 
 class TestApp < Sinatra::Base
   register Sinatra::Sprockets
