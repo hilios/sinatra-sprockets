@@ -13,6 +13,7 @@ module Sinatra
 
       def registered(app)
         # Create a Sprockets environment
+        return if app.root.nil?
         sprockets ||= ::Sprockets::Environment.new(app.root)
         app.set :sprockets, sprockets
         # Configure
@@ -71,4 +72,6 @@ module Sinatra
       self.set(key, default_value) unless self.respond_to? key
     end
   end
+
+  # register Sprockets
 end
