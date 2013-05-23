@@ -2,7 +2,6 @@ ENV['RACK_ENV'] = 'test'
 require 'app/mock'
 require 'rack/test'
 require 'minitest/autorun'
-require 'mocha/setup'
 
 class MiniTest::Test
   include Rack::Test::Methods
