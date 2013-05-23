@@ -1,13 +1,9 @@
 ENV['RACK_ENV'] ||= 'test'
-require 'minitest/autorun'
-require 'rack/test'
-
-require 'sinatra/base'
-require 'sinatra/sprockets'
-
 require 'app/test'
+require 'rack/test'
+require 'minitest/autorun'
 
-class MiniTest::Unit::TestCase
+class MiniTest::Test
   include Rack::Test::Methods
 
   def app
