@@ -16,7 +16,7 @@ module Sinatra
         app.set_default :assets_prefix,     '/assets'
         app.set_default :assets_path,       %w(assets)
         app.set_default :assets_precompile, %w(application.js 
-          application.css *.gif *.jpg *.png *.svg *.ttf *.woff *.otf)
+          application.css *.css *.js *.gif *.jpg *.png *.svg *.ttf *.woff *.otf)
         app.set_default :assets_host,       ''
         # Compressors
         app.set_default :assets_css_compressor, :none
