@@ -69,5 +69,5 @@ module Sinatra
     end
   end
 
-  # register Sprockets
+  register Sprockets
 end

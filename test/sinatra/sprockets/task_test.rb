@@ -31,6 +31,7 @@ class Sinatra::Sprockets::TasksHelper < MiniTest::Test
     assert File.directory?(File.join(app.public_folder, app.assets_prefix))
     # Ensure every file was precompiled
     app.assets_precompile.each do |file|
+      next if file =~ /\*/
       path = app.sprockets[file].digest_path
       path = File.join(app.public_folder, app.assets_prefix, path)
       assert File.file?(path)
