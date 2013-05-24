@@ -2,10 +2,6 @@ require 'sprockets'
 
 Dir[File.join(File.expand_path(File.dirname __FILE__), "sprockets/**/*.rb")].each { |file| require file }
 
-# require 'lib/sinatra/sprockets/version'
-# require 'lib/sinatra/sprockets/server'
-# require 'lib/sinatra/sprockets/helpers'
-
 module Sinatra
   module Sprockets
     class << self
@@ -20,14 +16,14 @@ module Sinatra
         app.set_default :assets_prefix,     '/assets'
         app.set_default :assets_path,       %w(assets)
         app.set_default :assets_precompile, %w(application.js 
-          application.css)
+          application.css *.gif *.jpg *.png *.svg *.ttf *.woff *.otf)
         app.set_default :assets_host,       ''
         # Compressors
         app.set_default :assets_css_compressor, :none
         app.set_default :assets_js_compressor,  :none
         # Set the manifest file path
         app.set_default :assets_manifest_file, 
-          File.join(app.public_folder, app.assets_prefix, "manifset.json")
+          File.join(app.public_folder, app.assets_prefix, 'manifset.json')
         
         # Append all paths
         app.assets_path.each do |path|
