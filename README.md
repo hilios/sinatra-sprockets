@@ -123,36 +123,43 @@ Minification
 
 As seen on the last example of the configurantion you can configure other libraries to compress your assets, Sinatra::Sprockets handle them transparently and it's up to you to require the gems.
 
-### SASS
+#### SASS
 
 ```ruby
 gem 'sass'
 set :assets_css_compressor, :sass
 ```
 
-### Closure
+#### Closure
 
 ```ruby
 gem 'closure-compiler'
 set :assets_css_compressor, :closure
 ```
 
-### Uglifier
+#### Uglifier
 
 ```ruby
 gem 'uglifier'
 set :assets_css_compressor, :uglifier
 ```
 
-### Uglifier
+#### Uglifier
 
 ```ruby
 gem 'yui-compressor'
 set :assets_css_compressor, :yui
 ```
 
-#### Compass and others gems
+### Compass and others gems
 
 The integration is easily done by requiring the [sprockets-sass](https://github.com/petebrowne/sprockets-sass) gem.
 
 None the less any gem that have integration with the Sprockets will work seamlessly. If you need any other configuration you can call Sprockets configuration directly.
+
+Copyrights
+----------
+
+Copyrights 2012 [**Edson Hilios**](http://edson.hilios.com.br) edson (at) hilios (dot) com (dot) br
+
+This software is licensed under [MIT-LICENSE](https://github.com/hilios/sinatra-sprockets-wheel/blob/master/MIT-LICENSE)
