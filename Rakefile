@@ -11,3 +11,5 @@ Rake::TestTask.new do |test|
   test.test_files = FileList['test/**/*_test.rb']
   # test.verbose = true
 end
+
+task :default => [:test]
