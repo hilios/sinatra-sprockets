@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.test_files    = Dir["test/**/*"]
   s.require_paths = ["lib"]
 
-  s.add_dependency "sprockets"
-  s.add_dependency "sprockets-helpers"
+  s.add_dependency "sprockets", "~> 2.10.0"
+  s.add_dependency "sprockets-helpers", "~> 1.0.1"
   
   s.add_development_dependency "sinatra"
   s.add_development_dependency "rake"
