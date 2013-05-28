@@ -110,7 +110,13 @@ set :assets_path,   %w[
   app/assets/images
 ]
 set :assets_precompile,     %w(application.js application.css)
-set :assets_host,           '//cdn.host.com'
+set :assets_host,           'cdn.host.com'
+set :assets_protocol,       :https
+
+# Debug mode automatically sets
+# expand = true, digest = false, manifest = false
+set :assets_debug,          true
+
 set :assets_manifest_file,  File.join(public_folder, "assets/manifest.json")
 set :assets_css_compressor, :sass
 set :assets_js_compressor,  :uglifier

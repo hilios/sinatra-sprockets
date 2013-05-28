@@ -8,43 +8,49 @@ module Sinatra
       attr_accessor :sprockets
 
       def registered(app)
-        # Create a Sprockets environment
         return if app.root.nil?
-        sprockets ||= ::Sprockets::Environment.new(app.root)
-        app.set :sprockets, sprockets
-        # Configure
+        # Sprockets configuration
         app.set_default :assets_prefix,     '/assets'
         app.set_default :assets_path,       %w(assets)
         app.set_default :assets_precompile, %w(application.js application.css 
           *.css *.js *.gif *.jpg *.png *.svg *.ttf *.otf *.eot *.woff)
-        app.set_default :assets_host,       ''
-        app.set_default :assets_digest,     true
         # Compressors
         app.set_default :assets_css_compressor, :none
         app.set_default :assets_js_compressor,  :none
+        # Helpers options
+        app.set_default :assets_host,       ''
+        app.set_default :assets_protocol,   :relative
+        app.set_default :assets_digest,     true
+        app.set_default :assets_expand,     false
+        app.set_default :assets_debug,      false
         # Set the manifest file path
         app.set_default :assets_manifest_file,
           File.join(app.public_folder, app.assets_prefix)
         
-        # Append all paths
-        app.assets_path.each do |path|
-          path = File.join(app.root, path) unless path =~ /^\//
-          sprockets.append_path path
-        end
-
         app.configure do
+          # Create a Sprockets environment
+          sprockets ||= ::Sprockets::Environment.new(app.root)
+          app.set :sprockets, sprockets
+          # Append all paths to Sprockets
+          app.assets_path.each do |path|
+            path = File.join(app.root, path) unless path =~ /^\//
+            sprockets.append_path path
+          end
           # Configure Sprockets::Helpers
           ::Sprockets::Helpers.configure do |config|
             config.environment = app.sprockets
-            config.manifest    = ::Sprockets::Manifest.new(app.sprockets, 
-              app.assets_manifest_file)
             config.prefix      = app.assets_prefix
             config.public_path = app.public_folder
+            config.manifest    = ::Sprockets::Manifest.new(app.sprockets, 
+              app.assets_manifest_file)
+            # Optionals
+            config.asset_host  = app.assets_host
+            config.protocol    = app.assets_protocol
             config.digest      = app.assets_digest
-            # Force to debug mode in development mode
+            config.expand      = app.assets_expand
             # Debug mode automatically sets
             # expand = true, digest = false, manifest = false
-            config.debug       = true if app.development?
+            config.debug       = app.assets_debug
           end
           # Add my helpers
           app.helpers Helpers
