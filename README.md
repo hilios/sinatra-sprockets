@@ -148,7 +148,7 @@ gem 'uglifier'
 set :assets_css_compressor, :uglifier
 ```
 
-#### Uglifier
+#### YUI Compressor
 
 ```ruby
 gem 'yui-compressor'
