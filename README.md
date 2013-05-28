@@ -64,12 +64,19 @@ In the application.(js|css) you can include your requirements:
 //= require_tree .
 ```
 
+Compilation & Production environment
+------------------------------------
+
 By default Sprockets don't serve your file in production so it's up to you compile them, just set-up your `Rakefile` and run the `assets:precompile` task.
 
 ```ruby
 require 'sinatra/sprockets/task'
 require 'sintra_app'
 
+# This will define the following task
+#   rake assets:precompile
+#   rake assets:clobber
+#   rake assets:clean
 Sinatra::Sprockets.rake_tasks(App)
 ```
 
