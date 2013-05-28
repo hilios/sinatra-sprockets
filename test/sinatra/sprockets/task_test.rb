@@ -11,6 +11,10 @@ class Sprockets::Manifest
 end
 
 class Sinatra::Sprockets::TasksHelper < MiniTest::Test
+  def test_order
+    :alpha
+  end
+  
   def setup
     require 'rake'
     @rake = Rake::Application.new
@@ -30,12 +34,17 @@ class Sinatra::Sprockets::TasksHelper < MiniTest::Test
     @rake["assets:precompile"].invoke
     assert File.directory?(File.join(app.public_folder, app.assets_prefix))
     # Ensure every file was precompiled
-    app.assets_precompile.each do |file|
-      next if file =~ /\*/
+    Dir['test/app/assets/**/*'].each do |file|
+      file = file[16...file.length]
       path = app.sprockets[file].digest_path
       path = File.join(app.public_folder, app.assets_prefix, path)
-      assert File.file?(path)
+      assert File.exists?(path)
     end
+    # Ensure manifest file was created
+    manifest_file = ::Sprockets::Manifest.new(app.sprockets, 
+      File.join(app.public_folder, app.assets_prefix))
+    
+    File.exists?(manifest_file.path)
   end
 
   def test_1_clobber_task
