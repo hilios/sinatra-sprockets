@@ -8,7 +8,7 @@ module Sinatra
       def stylesheets(*args)
         args.map! do |asset|
           asset = "#{asset}.css" if asset.is_a? Symbol
-          "<link href='#{asset_path(asset)}' rel='stylesheet' type='text/css' />"
+          stylesheet_tag(asset)
         end
         args.join("")
       end
@@ -17,7 +17,7 @@ module Sinatra
       def javascripts(*args)
         args.map! do |asset|
           asset = "#{asset}.js" if asset.is_a? Symbol
-          "<script type='text/javascript' src='#{asset_path(asset)}'></script>"
+          javascript_tag(asset)
         end
         args.join("")
       end

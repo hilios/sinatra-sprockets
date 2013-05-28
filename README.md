@@ -76,7 +76,7 @@ Sinatra::Sprockets.rake_tasks(App)
 Helpers
 -------
 
-This gem come bundled with [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) to help the path resolution of your assets inside sprockets itself or your application.
+This gem come bundled with [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) to help the path resolution of your assets inside sprockets or your application. All methods available in the gem will be at your disposal has helper once you register the extension.
 
 ```css
 body {
@@ -86,16 +86,14 @@ body {
 
 ```erb
 <img src="<%= image_path('hello.jpg') %>" />
-```
+<script src="<%= javascript_path 'application' %>"></script>
+<link rel="stylesheet" href="<%= stylesheet_path 'application' %>">
 
-None the less there there are two helpers inherited from Rails for assign the asset on your template:
+<%= javascript_tag 'application' %>
+<%= stylesheet_tag 'application' %>
 
-```erb
-<%= javascript :application %>
-<%= stylesheet :application %>
-
-<%= javascripts :js, :another_js %>
-<%= stylesheets :css, :another_css %>
+<!-- Handle the expansion of assets for debugging like Rails -->
+<%= javascript_tag 'application', expand: true %>
 ```
 
 Configuration

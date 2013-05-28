@@ -15,15 +15,16 @@ module Sinatra
         # Configure
         app.set_default :assets_prefix,     '/assets'
         app.set_default :assets_path,       %w(assets)
-        app.set_default :assets_precompile, %w(application.js 
-          application.css *.css *.js *.gif *.jpg *.png *.svg *.ttf *.woff *.otf)
+        app.set_default :assets_precompile, %w(application.js application.css 
+          *.css *.js *.gif *.jpg *.png *.svg *.ttf *.otf *.eot *.woff)
         app.set_default :assets_host,       ''
+        app.set_default :assets_digest,     true
         # Compressors
         app.set_default :assets_css_compressor, :none
         app.set_default :assets_js_compressor,  :none
         # Set the manifest file path
-        app.set_default :assets_manifest_file, 
-          File.join(app.public_folder, app.assets_prefix, 'manifset.json')
+        app.set_default :assets_manifest_file,
+          File.join(app.public_folder, app.assets_prefix)
         
         # Append all paths
         app.assets_path.each do |path|
@@ -39,7 +40,11 @@ module Sinatra
               app.assets_manifest_file)
             config.prefix      = app.assets_prefix
             config.public_path = app.public_folder
-            config.digest      = true
+            config.digest      = app.assets_digest
+            # Force to debug mode in development mode
+            # Debug mode automatically sets
+            # expand = true, digest = false, manifest = false
+            config.debug       = true if app.development?
           end
           # Add my helpers
           app.helpers Helpers
