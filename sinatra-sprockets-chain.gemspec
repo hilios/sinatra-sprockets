@@ -5,7 +5,7 @@ require "sinatra/sprockets/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "sinatra-sprockets-wheel"
+  s.name        = "sinatra-sprockets-chain"
   s.version     = Sinatra::Sprockets::VERSION
   s.authors     = ["Edson Hilios"]
   s.email       = ["edson.hilios@gmail.com"]
