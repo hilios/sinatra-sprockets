@@ -17,7 +17,7 @@ gem 'sinatra-sprockets-chain'
 
 If you are using the Classic style just require the extension.
 
-```
+```ruby
 require 'sinatra'
 require 'sinatra/sprockets'
 
@@ -102,24 +102,23 @@ Configuration
 You can control Sprockets entirely using Sinatra `set` configuration method. Bellow a list of the configuration:
 
 ```ruby
+# Main
 set :assets_prefix, '/assets'
-set :assets_path,   %w[
-  app/assets/vendor
-  app/assets/stylesheets
-  app/assets/javascripts
-  app/assets/images
-]
+set :assets_path,   Dir['app/assets/**'] # All folders in asset
 set :assets_precompile,     %w(application.js application.css)
+# Compilers
+set :assets_css_compressor, :sass
+set :assets_js_compressor,  :uglifier
+# Helper
 set :assets_host,           'cdn.host.com'
-set :assets_protocol,       :https
-
+set :assets_protocol,       :relative # or :http or :https
+set :assets_digest,         true
+set :assets_expand,         false
 # Debug mode automatically sets
 # expand = true, digest = false, manifest = false
 set :assets_debug,          true
-
+# Use this configuration with caution
 set :assets_manifest_file,  File.join(public_folder, "assets/manifest.json")
-set :assets_css_compressor, :sass
-set :assets_js_compressor,  :uglifier
 ```
 
 Minification
