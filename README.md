@@ -11,7 +11,7 @@ Installation & Usage
 Set on your Gemset file if you are using Bundler:
 
 ```ruby
-gem 'sinatra-sprockets-wheel'
+gem 'sinatra-sprockets-chain'
 # Don't forget the js evaluator: gem 'therubyracer'
 ```
 
