@@ -83,7 +83,7 @@ Sinatra::Sprockets.rake_tasks(App)
 Helpers
 -------
 
-This gem come bundled with [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) to help the path resolution of your assets inside sprockets or your application. All methods available in the gem will be at your disposal has helper once you register the extension.
+This gem come bundled with [sprockets-helpers](https://github.com/petebrowne/sprockets-helpers) to help the path resolution of your assets inside sprockets or your application. All methods available in the gem will be at your disposal as helpers once you register the extension.
 
 ```css
 body {
